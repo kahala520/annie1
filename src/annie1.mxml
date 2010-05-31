@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+
+	<fx:Script>
+		<![CDATA[
+			import mx.events.EffectEvent;
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				piggy.text="still piggy";
+				fadeout.play();
+			}
+
+
+			protected function fadeout_effectEndHandler(event:EffectEvent):void
+			{
+				fadeout.reverse();
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Parallel id="fadeout" duration="2000" target="{box}" effectEnd="fadeout_effectEndHandler(event)">
+			<s:Fade alphaFrom="1" alphaTo="0"/>
+			<s:Scale scaleXFrom="1" scaleYFrom="1" scaleXTo="3" scaleYTo="3"/>
+		</s:Parallel>
+		
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle" gap="100"/>
+	</s:layout>
+	<s:BorderContainer cornerRadius="10" width="500" height="400" id="box">
+		<s:layout>
+			<s:VerticalLayout horizontalAlign="center"/>
+		</s:layout>
+		<s:borderStroke>
+			<s:LinearGradientStroke weight="10" rotation="90">
+				<s:entries>
+					<s:GradientEntry color="#999999" ratio="0.1"/>
+					<s:GradientEntry color="#111111" ratio="0.8"/>
+				</s:entries>
+			</s:LinearGradientStroke>
+		</s:borderStroke>
+		<s:backgroundFill>
+			<s:RadialGradient>
+				<s:entries>
+					<s:GradientEntry color="#81BEF7"/>
+					<s:GradientEntry color="#F781F3"/>
+				</s:entries>
+			</s:RadialGradient>
+		</s:backgroundFill>
+		<s:Label text="donkey balls" color="#ffffff" fontSize="15" fontWeight="bold"/>
+		<s:TextInput text="piggy flying~" id="piggy"/>
+		<s:Button label="play my penis! heeheehee~" click="button1_clickHandler(event)"/>
+		<s:Label text="ninja" color="#F2F5A9" fontSize="24" alpha="0" id="ninja"/>
+	</s:BorderContainer>
+</s:Application>
