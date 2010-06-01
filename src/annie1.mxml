@@ -13,10 +13,25 @@
 				fadeout.play();
 			}
 
-
+			public var playreverse:Boolean = true;
+			public var wantToStop:Boolean = false;
+			
 			protected function fadeout_effectEndHandler(event:EffectEvent):void
 			{
-				fadeout.reverse();
+				if(wantToStop && !playreverse){
+					wantToStop = false;
+				}else{
+					fadeout.play(null,playreverse);
+					playreverse = !playreverse;
+				}
+			}
+
+
+			protected function stop_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				wantToStop = true;
+				//fadeout.stop();	
 			}
 
 		]]>
@@ -30,10 +45,7 @@
 		</s:Parallel>
 		
 	</fx:Declarations>
-	<s:layout>
-		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle" gap="100"/>
-	</s:layout>
-	<s:BorderContainer cornerRadius="10" width="500" height="400" id="box">
+	<s:BorderContainer cornerRadius="628" width="400" height="400" id="box" horizontalCenter="0" verticalCenter="0"> <!-- 400/2*3.1416 = 628 -->
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="center"/>
 		</s:layout>
@@ -58,4 +70,5 @@
 		<s:Button label="play my penis! heeheehee~" click="button1_clickHandler(event)"/>
 		<s:Label text="ninja" color="#F2F5A9" fontSize="24" alpha="0" id="ninja"/>
 	</s:BorderContainer>
+	<s:Button label="stop me!" click="stop_clickHandler(event)" top="0" left="0"/>
 </s:Application>
